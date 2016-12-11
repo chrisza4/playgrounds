@@ -1,9 +1,56 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
+import Loading from '../public/loading.svg'
 
-class App extends Component {
-  render() {
+import { Router, Route, Link, browserHistory } from 'react-router'
+
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
+import LoadingReducer from './loadingReducer'
+
+const store = createStore(LoadingReducer)
+
+const HomePage = (props) =>
+(
+  <div className="App">
+    <div className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+      <h2>Welcome to React</h2>
+    </div>
+    <p className="App-intro">
+      To get started, aaaedit <code>src/App.js</code> and save to reload.
+    </p>
+  </div>
+)
+
+
+const LoadingPage = React.createClass({
+
+  propTypes: {
+    isLoaded: React.PropTypes.bool,
+    stringToRender: React.PropTypes.string,
+    dispatch: React.PropTypes.func
+  },
+
+  componentDidMount() {
+    if (!this.props.isLoaded) {
+      // Mimic lodaing data here
+      setTimeout(() => this.props.dispatch({ type: 'LOAD_DATA' }), 2000)
+    }
+  },
+
+  renderLoadingState () {
+    if (this.props.isLoaded) return null
+    return <img src={Loading} />
+  },
+
+  renderLoadedData () {
+    if (!this.props.isLoaded) return null
+    return <b>Data loaded: {this.props.stringToRender}</b>
+  },
+
+  render () {
     return (
       <div className="App">
         <div className="App-header">
@@ -11,11 +58,34 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.renderLoadingState()}
+          {this.renderLoadedData()}
         </p>
       </div>
-    );
+    )
   }
-}
+})
 
-export default App;
+const LoadingPageContainer = connect((state) => ({
+  isLoaded: state.isLoaded,
+  stringToRender: state.stringToRender
+}))(LoadingPage)
+
+const PageWithStore = props => (
+  <Provider store={store}>
+    <LoadingPageContainer />
+  </Provider>
+)
+
+const App = React.createClass({
+  render () {
+    return (
+      <Router history={browserHistory}>
+        <Route path='/' component={HomePage} />
+        <Route path='test' component={PageWithStore} />
+      </Router>
+    )
+  }
+})
+
+export default App
