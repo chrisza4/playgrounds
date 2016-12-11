@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height:100%;
+}
+html {
+  height: 100%;
+}
+.gantt_open {
+  display: inline-block;
+  position:relative;
+  height:10px;
+  left: -1px;
+  top: 10px;
+}
+.gantt_tree_icon.gantt_close,
+.gantt_tree_icon.gantt_open {
+  background: none;
+  width: 13px;
+  height: 8px;
+  top: 6px;
+}
+
+.gantt_close {
+  transform: rotate(180deg);
+  position:relative;
+  display:inline-block;
+  height:14px;
+}
+.gantt_close:before,
+.gantt_close:after,
+.gantt_open:before,
+.gantt_open:after {
+  position:absolute;
+  display:block;
+  content:"";
+  border:7px solid transparent;
+}
+
+.gantt_close:before,
+.gantt_open:before {
+  top:0;
+  border-top-color:#b0b4bb;
+}
+.gantt_close:after,
+.gantt_open:after {
+  top:-2px;
+  border-top-color:#fff;
+}
+.gantt_tree_content {
+  margin: 0 0 0 5px;
+  color: #696f7a;
+  line-height:20px;
+}
+.gantt_grid {
+
+}
+.gantt_selected {
+  background: none;
+}
+.gantt_grid_scale, .gantt_task_scale {
+  border-bottom: 0;
+}
+.gantt_task_line.gantt_selected {
+  box-shadow: none;
+}
+.gantt_task_row.gantt_selected .gantt_task_cell {
+  border-right: 1px solid #ebebeb;
+}
+.gantt_label {
+  display: inline-block;
+  height: 80%;
+  line-height:30px;
+  width: 3px;
+  border-radius: 3px;
+  padding-left: 7px;
+  box-sizing: border-box;
+  margin-top:-5px;
+}
+.gantt_scale_line:first-child {
+  background: #f3f4f5;
+}
+.gantt_task .gantt_task_scale .gantt_scale_cell {
+  color: #363b47;
+}
+.gantt_row {
+  border: 0;
+}
+.gantt_grid_row {
+  border-bottom: 0;
+}
+.project {
+  background: #b0b4bb;
+  border: none;
+  box-shadow: 0;
+  border-radius: 0;
+}
+.tasklist {
+  background: #b0b4bb;
+  border: none;
+  box-shadow: 0;
+  border-radius: 0;
+}
+.project .gantt_task_content,
+.tasklist .gantt_task_content {
+  overflow: visible;
+}
+.project_start-indicator {
+  width: 0;
+  height: 0;
+  position: absolute;
+  margin-top: 15px;
+  border-style: solid;
+  border-width: 10px 15px 0 0;
+  border-color: #b0b4bb transparent transparent transparent;
+}
+.project_end-indicator {
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 0;
+  margin-top: 15px;
+  border-style: solid;
+  border-width: 0 15px 10px 0;
+  border-color: transparent #b0b4bb transparent transparent;
+}
+.overdue {
+  background: #e95e51;
+  border: none;
+  box-shadow: 0;
+}
+.overdue .gantt_task_progress {
+  box-sizing: border-box;
+  background: #f2938a;
+  border: solid 1px #e95e51;
+}
+.planned {
+  background: #bbdaef;
+  border: solid 1px #5b95b8;
+}
+.planned .gantt_task_progress {
+  background: #bbdaef;
+}
+.due-today {
+  background: #ffc866;
+  border: solid 1px #f4ab28;
+}
+.done {
+  background: #99dade;
+  border: solid 1px #34c1c5;
+}
+.no-duedate {
+
+}
+.no-duedate:after {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  transform-origin: 0% 0%;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
+  right: -12px;
+  background: #bbdaef;
+  border-top: 1px solid #5b95b8;
+  border-right: 1px solid #5b95b8;
+}
+.weekend {
+  background: #fff7e9;
+}
