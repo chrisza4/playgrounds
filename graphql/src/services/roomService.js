@@ -9,7 +9,7 @@ export function getRoomsByUserId (userId) {
 
 export function getRoomById (roomId) {
   T.string(roomId)
-  return RoomModel.find({
+  return RoomModel.findOne({
     _id: roomId
-  })
+  }).lean()
 }
