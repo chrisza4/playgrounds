@@ -14,6 +14,6 @@ Everything is packed in the App.js
 - LoadingPage ---> Component that we concern
 - LoadingPageContainer ---> Connect component to redux
 
-In ComponentDidMount, we find out if data already fetched from server
-In render, we render data if only data is already fetched
-Otherwise, we render loading state
+* In ComponentDidMount, we find out if data already fetched from server
+* In render, we render data if only data is already fetched
+* Otherwise, we render loading state
