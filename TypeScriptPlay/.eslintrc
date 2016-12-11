@@ -1,0 +1,58 @@
+{ "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "brace-style": [1, "stroustrup"],
+    "react/no-multi-comp": 0,
+    "import/default": 0,
+    "import/no-duplicates": 0,
+    "import/named": 0,
+    "import/namespace": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 2,
+    "comma-dangle": 0,  // not sure why airbnb turned this on. gross!
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "new-cap": 0,
+    "no-alert": 0,
+    "no-console": 0,
+    "no-trailing-spaces": [2, { "skipBlankLines": true }],
+    "no-unused-expressions": 0,
+    "no-unused-vars": [2, { "args": "none" }],
+    "semi": [2, "never"],
+    "eqeqeq": [1, "allow-null"],
+    "spaced-comment": 0,
+    "space-before-function-paren": [1 , "always"],
+    "strict": 0,
+    "padded-blocks": 0,
+    "id-length": 0,
+    "key-spacing": 0,
+    "func-names": 0,
+    "no-multi-spaces": 0,
+    "quotes": [2, "single"],
+    "jsx-quotes": [1, "prefer-single"],
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0,
+    "react/prefer-es6-class": 0,
+    "eol-last": 0
+  },
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": ["node_modules", "src"]
+    }
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true,
+    "sinon": false,
+    "expect": false
+  }
+}
