@@ -11,8 +11,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 Everything is packed in the App.js
 
-LoadingPage ---> Component that we concern
-LoadingPageContainer ---> Connect component to redux
+- LoadingPage ---> Component that we concern
+- LoadingPageContainer ---> Connect component to redux
 
 In ComponentDidMount, we find out if data already fetched from server
 In render, we render data if only data is already fetched
