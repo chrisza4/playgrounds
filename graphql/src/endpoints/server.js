@@ -3,7 +3,7 @@
 // const { buildSchema } = require('graphql')
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import { schema } from './helloworld'
+import schema from './graphQlSchemas'
 
 export default function createExpressServer () {
   const app = express()
