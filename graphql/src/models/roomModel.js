@@ -10,4 +10,4 @@ const roomSchema = new Mongoose.Schema({
   members: Array
 })
 
-export default Mongoose.model('Rooms', roomSchema)
+export default Mongoose.model('rooms', roomSchema)

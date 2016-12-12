@@ -8,8 +8,21 @@ export function getRoomsByUserId (userId) {
 }
 
 export function getRoomById (roomId) {
-  T.string(roomId)
+  T.String(roomId)
   return RoomModel.findOne({
     _id: roomId
   }).lean()
+}
+
+export function getAllRooms () {
+  return RoomModel.find({
+  }).lean()
+}
+
+export function createRoom (title) {
+  T.String(title)
+  return RoomModel.create({
+    title,
+    members: [ ]
+  })
 }

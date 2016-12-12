@@ -5,6 +5,9 @@ import {
   GraphQLList
 } from 'graphql'
 
+import * as MessageService from '../services/messageService'
+import * as RoomService from '../services/roomService'
+
 
 const messageType = new GraphQLObjectType({
   name: 'Message',
@@ -27,7 +30,7 @@ const roomType = new GraphQLObjectType({
       type: new GraphQLList(messageType),
       description: 'list of messages',
       resolve: room => {
-        return [{ body: 'hahaha' }]
+        return MessageService.getMessageByRoomId(String(room._id))
       }
     }
   }
@@ -36,9 +39,13 @@ const roomType = new GraphQLObjectType({
 export const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
-    room: {
-      type: roomType,
-      resolve: () => ({ title: 'this room' })
+    rooms: {
+      type: new GraphQLList(roomType),
+      resolve: async () => {
+        console.log(arguments)
+        const rooms = await RoomService.getAllRooms()
+        return rooms
+      }
     }
   }
 })
