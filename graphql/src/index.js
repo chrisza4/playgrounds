@@ -1,8 +1,10 @@
 import connect from './db'
 import Log from 'winston'
+import createExpressServer from './endpoints/server'
 
 async function initServer () {
   await connect()
+  createExpressServer()
 }
 
 initServer()
