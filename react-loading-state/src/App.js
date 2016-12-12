@@ -1,39 +1,30 @@
-import React, { Component } from 'react'
+import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Loading from '../public/loading.svg'
 
 import { Router, Route, Link, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { Provider, connect } from 'react-redux'
-import LoadingReducer from './loadingReducer'
 
-const store = createStore(LoadingReducer)
+const store = createStore(combineReducers({
+  routing: routerReducer
+}))
 
-const LoadingPage = React.createClass({
+const MainPage = React.createClass({
 
   propTypes: {
-    isLoaded: React.PropTypes.bool,
-    stringToRender: React.PropTypes.string,
-    dispatch: React.PropTypes.func
+    currentRoute: React.PropTypes.string,
+    children: React.PropTypes.node,
   },
 
-  componentDidMount() {
-    if (!this.props.isLoaded) {
-      // Mimic lodaing data here
-      setTimeout(() => this.props.dispatch({ type: 'LOAD_DATA' }), 2000)
-    }
-  },
-
-  renderLoadingState () {
-    if (this.props.isLoaded) return null
-    return <img src={Loading} />
-  },
-
-  renderLoadedData () {
-    if (!this.props.isLoaded) return null
-    return <b>Data loaded: {this.props.stringToRender}</b>
+  renderLink (path, content) {
+    const linkClass = this.props.currentRoute === path ? 'link-active' : 'link-inactive'
+    return (
+      <Link to={path} className={linkClass}>{content}</Link>
+    )
   },
 
   render () {
@@ -42,33 +33,44 @@ const LoadingPage = React.createClass({
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
+
         </div>
         <p className="App-intro">
-          {this.renderLoadingState()}
-          {this.renderLoadedData()}
+          {this.renderLink('link1', 'Go to link 1')}
+          &nbsp;
+          {this.renderLink('link2', 'Go to link 2')}
         </p>
+        <hr />
+        {this.props.children}
       </div>
     )
   }
 })
 
-const LoadingPageContainer = connect((state) => ({
-  isLoaded: state.isLoaded,
-  stringToRender: state.stringToRender
-}))(LoadingPage)
+const MainPageContainer = connect((state, ownProps) => {
+  return {
+    children: ownProps.children,
+    currentRoute: state.routing.locationBeforeTransitions.pathname
+  }
+})(MainPage)
 
-const PageWithStore = props => (
-  <Provider store={store}>
-    <LoadingPageContainer />
-  </Provider>
-)
+
+const Link1Page = () => <div> This is page in Link 1 </div>
+const Link2Page = () => <div> This is page in Link 2 </div>
+
+const history = syncHistoryWithStore(browserHistory, store)
 
 const App = React.createClass({
   render () {
     return (
-      <Router history={browserHistory}>
-        <Route path='/' component={PageWithStore} />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <Route path='/' component={MainPageContainer}>
+            <Route path='link1' component={Link1Page} />
+            <Route path='link2' component={Link2Page}/>
+          </Route>
+        </Router>
+      </Provider>
     )
   }
 })
