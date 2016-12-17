@@ -43,7 +43,7 @@ const ChatRoomContainer = React.createClass({
 
 export default connect(
   (state, props) => ({
-    messages: state.message
+    messages: _.get(state, 'messages.data', [ ])
   }),
   (dispatch) => {
     return {
