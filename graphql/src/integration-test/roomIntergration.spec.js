@@ -37,23 +37,20 @@ describe('Room endpoint query tests', () => {
       }
     }`
     const result = await graphql(schemas, query)
-    assert(result.data.rooms.length === 1)
+    assert(result.data.rooms.length === 2)
     assert(result.data.rooms[0].title === 'Test room')
     assert(result.data.rooms[0].messages[0].body === 'Message1')
   })
 
   it('should get messages by room id', async () => {
     const query = `query {
-      messages(roomId:${String(room2._id)}) {
-        title
-        messages {
-          _id
-          body
-        }
+      messages(roomId: "${String(room2._id)}") {
+        _id
+        body
       }
     }`
     const result = await graphql(schemas, query)
     assert(result.data.messages.length === 1)
-    assert(result.data.messages[0].body === 'Message in room2')
+    assert.equal(result.data.messages[0].body, 'Message in room2')
   })
 })

@@ -56,12 +56,7 @@ export const queryType = new GraphQLObjectType({
         roomId: { type: GraphQLString }
       },
       resolve: async (_, { roomId }) => {
-        return [
-          {
-            _id: roomId,
-            body: 'dummy'
-          }
-        ]
+        return MessageService.getMessageByRoomId(roomId)
       }
     }
   }
