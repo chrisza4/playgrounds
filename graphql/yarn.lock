@@ -1098,13 +1098,13 @@ database-cleaner:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/database-cleaner/-/database-cleaner-1.2.0.tgz#0f756f1270e29bdd838dd8e989c7b22cca8ddd64"
 
-debug@2.2.0, debug@^2.1.1, debug@^2.2.0, debug@~2.2.0:
+debug@2.2.0, debug@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
     ms "0.7.1"
 
-debug@2.3.3:
+debug@2.3.3, debug@^2.1.1, debug@^2.2.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
   dependencies:
@@ -1300,7 +1300,7 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
-es6-promise@3.2.1, es6-promise@^3.0.2:
+es6-promise@3.2.1, es6-promise@^3.0.2, es6-promise@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.2.1.tgz#ec56233868032909207170c39448e24449dd1fc4"
 
@@ -1493,6 +1493,13 @@ express-graphql@^0.6.1:
     content-type "^1.0.0"
     http-errors "^1.3.0"
     raw-body "^2.1.0"
+
+express-http-proxy@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/express-http-proxy/-/express-http-proxy-0.10.1.tgz#dff83794a8ec11db0e7d9448e6ce1ca6278b3dd7"
+  dependencies:
+    es6-promise "^3.2.1"
+    raw-body "^2.1.7"
 
 express@^4.14.0:
   version "4.14.0"
@@ -1861,6 +1868,10 @@ http-signature@~1.1.0:
     assert-plus "^0.2.0"
     jsprim "^1.2.2"
     sshpk "^1.7.0"
+
+http@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/http/-/http-0.0.0.tgz#86e6326d29c5d039de9fac584a45689f929f4f72"
 
 iconv-lite@0.4.13:
   version "0.4.13"
@@ -2843,7 +2854,7 @@ range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raw-body@^2.1.0:
+raw-body@^2.1.0, raw-body@^2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.1.7.tgz#adfeace2e4fb3098058014d08c072dcc59758774"
   dependencies:
