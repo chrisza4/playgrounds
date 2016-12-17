@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import ChatMessage from './ChatMessage'
 import './ChatRoomContainer.css'
 
@@ -19,7 +20,7 @@ const ChatRoomContainer = React.createClass({
 
   renderMessages () {
     return this.props.messages.map(m => (
-      <ChatMessage username='hello' body={m.body} />
+      <ChatMessage username='hello' body={m.body} key={`message_${m._id}`} />
     ))
   },
 
@@ -37,4 +38,8 @@ const ChatRoomContainer = React.createClass({
   }
 })
 
-export default ChatRoomContainer
+export default connect(
+  (state, props) => ({
+    messages: state.message
+  })
+)(ChatRoomContainer)
