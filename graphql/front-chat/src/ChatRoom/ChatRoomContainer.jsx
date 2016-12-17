@@ -1,25 +1,28 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import ChatMessage from './ChatMessage'
 import './ChatRoomContainer.css'
 
-import createMessageFixtures from '../Fixtures/MessageFixtures'
+import * as ChatActions from './redux/actions.js'
+
+import ChatMessage from './ChatMessage'
+import React from 'react'
 import TextField from 'material-ui/TextField'
+import _ from 'lodash'
+import { connect } from 'react-redux'
 
 const ChatRoomContainer = React.createClass({
 
   propTypes: {
-    messages: React.PropTypes.array
+    messages: React.PropTypes.array,
+    isFetched: React.PropTypes.bool,
   },
 
-  getDefaultProps () {
-    return {
-      messages: createMessageFixtures()
+  componentDidMount () {
+    if (!this.props.isFetched) {
+      ChatActions.fetchMessage()
     }
   },
 
   renderMessages () {
-    return this.props.messages.map(m => (
+    return _.map(this.props.messages, m => (
       <ChatMessage username='hello' body={m.body} key={`message_${m._id}`} />
     ))
   },

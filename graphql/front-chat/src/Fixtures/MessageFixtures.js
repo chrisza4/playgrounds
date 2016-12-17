@@ -1,5 +1,7 @@
+import _ from 'lodash'
+
 export default function createFixtures () {
-  return [
+  const result = [
     {
       _id: 'message1',
       body: 'hahahahahahahaha',
@@ -22,4 +24,5 @@ export default function createFixtures () {
       created: new Date()
     },
   ]
+  return _.keyBy(result, t => t._id)
 }
