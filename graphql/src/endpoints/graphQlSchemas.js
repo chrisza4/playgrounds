@@ -26,9 +26,13 @@ const messageType = new GraphQLObjectType({
 const roomType = new GraphQLObjectType({
   name: 'Room',
   fields: {
+    _id: {
+      type: GraphQLString,
+      description: 'Room Id'
+    },
     title: {
       type: GraphQLString,
-      descripton: 'Room title'
+      description: 'Room title'
     },
     messages: {
       type: new GraphQLList(messageType),

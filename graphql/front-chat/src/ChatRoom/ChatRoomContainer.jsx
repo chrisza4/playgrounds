@@ -1,23 +1,23 @@
 import './ChatRoomContainer.css'
 
-import * as ChatActions from './redux/actions.js'
-
 import ChatMessage from './ChatMessage'
 import React from 'react'
 import TextField from 'material-ui/TextField'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { fetchStarter } from '../store/AppActions.js'
 
 const ChatRoomContainer = React.createClass({
 
   propTypes: {
     messages: React.PropTypes.array,
     isFetched: React.PropTypes.bool,
+    onFetchStarter: React.PropTypes.func
   },
 
   componentDidMount () {
     if (!this.props.isFetched) {
-      ChatActions.fetchMessage()
+      this.props.onFetchStarter()
     }
   },
 
@@ -44,5 +44,10 @@ const ChatRoomContainer = React.createClass({
 export default connect(
   (state, props) => ({
     messages: state.message
-  })
+  }),
+  (dispatch) => {
+    return {
+      onFetchStarter: () => dispatch(fetchStarter())
+    }
+  }
 )(ChatRoomContainer)

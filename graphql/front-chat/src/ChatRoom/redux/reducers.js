@@ -5,6 +5,10 @@ const initialState = createMessageFixtures()
 
 function MessageReducer(state = initialState, action) {
   switch (action.type) {
+    case 'STARTER': {
+
+      return state
+    }
     default:
       return state
   }

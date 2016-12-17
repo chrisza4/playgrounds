@@ -1,18 +1,18 @@
+import './App.css'
+
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import AppBar from 'material-ui/AppBar'
-import Subheader from 'material-ui/Subheader'
-import { MenuItem } from 'material-ui/Menu'
+import ChatRoomContainer from './ChatRoom/ChatRoomContainer.jsx'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import IconButton from 'material-ui/IconButton'
+import { MenuItem } from 'material-ui/Menu'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
-
-import ChatRoomContainer from './ChatRoom/ChatRoomContainer.jsx'
-import './App.css'
+import Subheader from 'material-ui/Subheader'
 import getStore from './store/createStore'
-
+import logo from './logo.svg'
 
 class App extends Component {
 
@@ -73,6 +73,10 @@ class App extends Component {
       </Provider>
     )
   }
+}
+
+App.propTypes = {
+  onFetchStarter: React.PropTypes.func
 }
 
 export default App
