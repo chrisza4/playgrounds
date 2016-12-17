@@ -1,0 +1,8 @@
+.gc-chat-room-container {
+  position: relative;
+}
+
+.gc-chat-text {
+  position: absolute;
+  bottom: 0px;
+}

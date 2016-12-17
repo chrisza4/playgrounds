@@ -6,16 +6,18 @@ import Subheader from 'material-ui/Subheader'
 import { MenuItem } from 'material-ui/Menu'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
+import IconButton from 'material-ui/IconButton'
 
 import ChatRoomContainer from './ChatRoom/ChatRoomContainer.jsx'
 import './App.css'
+
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      openDrawer: true
+      openDrawer: false
     }
   }
 
@@ -37,11 +39,22 @@ class App extends Component {
     )
   }
 
+  renderIconButton () {
+    return (
+      <IconButton iconClassName='material-icons' onClick={this.toggleDrawer}>reorder</IconButton>
+    )
+  }
+
   render () {
     return (
       <MuiThemeProvider>
         <div>
-          <AppBar title='Chat here' onLeftIconButtonTouchTap={this.toggleDrawer} />
+          <AppBar
+            title='Room1'
+            onLeftIconButtonTouchTap={this.toggleDrawer}
+            onRightIconButtonTouchTap={this.toggleDrawer}
+            iconElementLeft={this.renderIconButton()}
+          />
           <Drawer open={this.state.openDrawer} docked={true} onRequestChange={(e) => console.debug('====')}>
             <Subheader> Chat users </Subheader>
             <MenuItem primaryText='Room1' />
@@ -49,7 +62,7 @@ class App extends Component {
             <Divider />
             <MenuItem primaryText='Room3' />
           </Drawer>
-          <div className='gc-main-layout' onClick={this.toggleDrawer}>
+          <div className='gc-main-layout'>
             <ChatRoomContainer />
           </div>
         </div>

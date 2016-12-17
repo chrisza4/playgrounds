@@ -1,4 +1,5 @@
 import React from 'react'
+import './ChatMessage.css'
 
 const ChatMessage = React.createClass({
   propTypes: {
@@ -8,8 +9,10 @@ const ChatMessage = React.createClass({
 
   render () {
     return (
-      <div>
-        {this.props.username} : {this.props.body}
+      <div className='gc-chat-message'>
+        <span className='gc-chat-message__username'>
+          {this.props.username}
+        </span> : {this.props.body}
       </div>
     )
   }
