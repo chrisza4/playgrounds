@@ -12,6 +12,10 @@ import * as RoomService from '../services/roomService'
 const messageType = new GraphQLObjectType({
   name: 'Message',
   fields: {
+    _id: {
+      type: GraphQLString,
+      descripton: 'message id'
+    },
     body: {
       type: GraphQLString,
       description: 'message body'
@@ -42,9 +46,22 @@ export const queryType = new GraphQLObjectType({
     rooms: {
       type: new GraphQLList(roomType),
       resolve: async () => {
-        console.log(arguments)
         const rooms = await RoomService.getAllRooms()
         return rooms
+      }
+    },
+    messages: {
+      type: new GraphQLList(messageType),
+      args: {
+        roomId: { type: GraphQLString }
+      },
+      resolve: async (_, { roomId }) => {
+        return [
+          {
+            _id: roomId,
+            body: 'dummy'
+          }
+        ]
       }
     }
   }

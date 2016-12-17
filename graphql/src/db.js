@@ -10,7 +10,7 @@ export default async function connect () {
     if (_db) {
       return _db
     }
-    Mongoose.promise = require('bluebird')
+    Mongoose.Promise = require('bluebird')
     const connection = await Mongoose.connect(config.MONGO_URL, {
       promiseLibrary: require('bluebird')
     })
