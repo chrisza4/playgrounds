@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import RaisedButton from 'material-ui/RaisedButton'
 import AppBar from 'material-ui/AppBar'
 import Subheader from 'material-ui/Subheader'
-import {Menu, MenuItem} from 'material-ui/Menu'
+import { MenuItem } from 'material-ui/Menu'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
+
+import ChatRoomContainer from './ChatRoom/ChatRoomContainer.jsx'
 import './App.css'
 
 class App extends Component {
@@ -49,7 +50,7 @@ class App extends Component {
             <MenuItem primaryText='Room3' />
           </Drawer>
           <div className='gc-main-layout' onClick={this.toggleDrawer}>
-            Main layout here
+            <ChatRoomContainer />
           </div>
         </div>
       </MuiThemeProvider>
