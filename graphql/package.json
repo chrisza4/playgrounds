@@ -40,6 +40,7 @@
     "lodash": "^4.17.2",
     "mongodb": "^2.2.15",
     "mongoose": "^4.7.2",
+    "socket.io": "^1.7.2",
     "tcomb": "^3.2.15",
     "uuid": "^3.0.1",
     "winston": "^2.3.0"
