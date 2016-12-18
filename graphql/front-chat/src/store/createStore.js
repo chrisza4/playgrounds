@@ -1,6 +1,6 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 
-import MessageReducer from '../ChatRoom/redux/reducers'
+import MessageReducer from '../Messages/reducers'
 import thunk from 'redux-thunk'
 
 export default function getStore () {

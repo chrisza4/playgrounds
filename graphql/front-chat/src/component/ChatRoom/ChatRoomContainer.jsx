@@ -5,7 +5,7 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import _ from 'lodash'
 import { connect } from 'react-redux'
-import { fetchStarter } from '../store/AppActions.js'
+import { fetchStarter } from '../../store/AppActions.js'
 
 const ChatRoomContainer = React.createClass({
 

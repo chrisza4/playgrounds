@@ -3,7 +3,7 @@ import './App.css'
 import React, { Component } from 'react'
 
 import AppBar from 'material-ui/AppBar'
-import ChatRoomContainer from './ChatRoom/ChatRoomContainer.jsx'
+import ChatRoomContainer from './component/ChatRoom/ChatRoomContainer.jsx'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import IconButton from 'material-ui/IconButton'

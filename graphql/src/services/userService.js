@@ -9,3 +9,7 @@ export function findById (userId) {
     _id: userId
   }).lean()
 }
+
+export function findAll () {
+  return UserModel.find({}).lean()
+}

@@ -1,12 +1,12 @@
+import Actions from '../store/Actions'
 import _ from 'lodash'
 import { combineReducers } from 'redux'
-import createMessageFixtures from '../../Fixtures/MessageFixtures'
 
-const initialState = createMessageFixtures()
+const initialState = [ ]
 
 export function MessageReducer(state = initialState, action) {
   switch (action.type) {
-    case 'STARTER': {
+    case Actions.FETCH_STARTER: {
       const messagesArray = _.reduce(action.data.rooms, (acc, val) => {
         const roomId = val._id
         const messages = _.map(val.messages, m => {

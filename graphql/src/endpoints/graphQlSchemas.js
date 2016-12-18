@@ -7,6 +7,7 @@ import {
 
 import * as MessageService from '../services/messageService'
 import * as RoomService from '../services/roomService'
+import * as UserService from '../services/userService'
 
 
 const messageType = new GraphQLObjectType({
@@ -44,6 +45,20 @@ const roomType = new GraphQLObjectType({
   }
 })
 
+const userType = new GraphQLObjectType({
+  name: 'Users',
+  fields: {
+    _id: {
+      type: GraphQLString,
+      description: 'User Id'
+    },
+    email: {
+      type: GraphQLString,
+      description: 'User email'
+    }
+  }
+})
+
 export const queryType = new GraphQLObjectType({
   name: 'Query',
   fields: {
@@ -61,6 +76,12 @@ export const queryType = new GraphQLObjectType({
       },
       resolve: async (_, { roomId }) => {
         return MessageService.getMessageByRoomId(roomId)
+      }
+    },
+    users: {
+      type: new GraphQLList(userType),
+      resolve: () => {
+        return UserService.findAll()
       }
     }
   }
