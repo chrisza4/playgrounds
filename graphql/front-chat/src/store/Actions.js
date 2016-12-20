@@ -1,4 +1,5 @@
 export default {
   FETCH_STARTER: 'STARTER',
+  FETCH_ROOM: 'FETCH_ROOM',
   ROOM_CHANGE: 'ROOM_CHANGE'
 }

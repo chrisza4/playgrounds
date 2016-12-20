@@ -1,10 +1,12 @@
 import './ChatRoomContainer.css'
 
 import ChatMessage from './ChatMessage'
+import FlatButton from 'material-ui/FlatButton'
 import React from 'react'
 import TextField from 'material-ui/TextField'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { fetchRoom } from '../../Rooms/actions.js'
 import { fetchStarter } from '../../store/AppActions.js'
 
 const ChatRoomContainer = React.createClass({
@@ -12,7 +14,8 @@ const ChatRoomContainer = React.createClass({
   propTypes: {
     messages: React.PropTypes.array,
     isFetched: React.PropTypes.bool,
-    onFetchStarter: React.PropTypes.func
+    onFetchStarter: React.PropTypes.func,
+    onFetchRoom: React.PropTypes.func
   },
 
   componentDidMount () {
@@ -33,6 +36,7 @@ const ChatRoomContainer = React.createClass({
         <div className='gc-chat-room-container' style={{height: '100%'}}>
           {this.renderMessages()}
           <div className='gc-chat-text'>
+            <FlatButton label='click' primary onClick={() => this.props.onFetchRoom('584e8e4c8957b62a77d71cad')} />
             <TextField hintText='Enter your message here..' />
           </div>
         </div>
@@ -54,7 +58,8 @@ export default connect(
   }),
   (dispatch) => {
     return {
-      onFetchStarter: () => dispatch(fetchStarter())
+      onFetchStarter: () => dispatch(fetchStarter()),
+      onFetchRoom: (roomId) => dispatch(fetchRoom(roomId))
     }
   }
 )(ChatRoomContainer)
