@@ -33,8 +33,11 @@ describe('Room reducer', () => {
       }
     }
     const expected = {
-      room1: _.omit(room1, 'messages'),
-      room2: _.omit(room2, 'messages')
+      data: {
+        room1: _.omit(room1, 'messages'),
+        room2: _.omit(room2, 'messages')
+      },
+      selectedRoom: 'room1'
     }
     const actual = RoomReducer({}, action)
     expect(actual).toEqual(expected)

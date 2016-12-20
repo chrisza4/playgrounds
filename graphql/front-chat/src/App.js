@@ -2,15 +2,13 @@ import './App.css'
 
 import React, { Component } from 'react'
 
-import AppBar from 'material-ui/AppBar'
+import ChatAppBarContainer from './component/ChatAppBarContainer.jsx'
 import ChatRoomContainer from './component/ChatRoom/ChatRoomContainer.jsx'
-import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
 import IconButton from 'material-ui/IconButton'
-import { MenuItem } from 'material-ui/Menu'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { Provider } from 'react-redux'
-import Subheader from 'material-ui/Subheader'
+import RoomSelector from './component/RoomSelector.jsx'
 import getStore from './store/createStore'
 import logo from './logo.svg'
 
@@ -41,29 +39,14 @@ class App extends Component {
     )
   }
 
-  renderIconButton () {
-    return (
-      <IconButton iconClassName='material-icons' onClick={this.toggleDrawer}>reorder</IconButton>
-    )
-  }
-
   render () {
     return (
       <Provider store={getStore()}>
         <MuiThemeProvider>
           <div>
-            <AppBar
-              title='Room1'
-              onLeftIconButtonTouchTap={this.toggleDrawer}
-              onRightIconButtonTouchTap={this.toggleDrawer}
-              iconElementLeft={this.renderIconButton()}
-            />
+            <ChatAppBarContainer onToggleDrawer={this.toggleDrawer} />
             <Drawer open={this.state.openDrawer} docked={true} onRequestChange={(e) => console.debug('====')}>
-              <Subheader> Chat users </Subheader>
-              <MenuItem primaryText='Room1' />
-              <MenuItem primaryText='Room2' />
-              <Divider />
-              <MenuItem primaryText='Room3' />
+              <RoomSelector />
             </Drawer>
             <div className='gc-main-layout'>
               <ChatRoomContainer />

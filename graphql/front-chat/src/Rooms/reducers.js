@@ -2,7 +2,8 @@ import Actions from '../store/Actions'
 import _ from 'lodash'
 
 const initialState = {
-
+  data: { },
+  selectedRoom: 0
 }
 
 export default function roomReducer (state = initialState, action) {
@@ -10,7 +11,10 @@ export default function roomReducer (state = initialState, action) {
     case Actions.FETCH_STARTER: {
       const rooms = action.data.rooms
       const roomsNoMessages = _(rooms).map(d => _.omit(d, 'messages')).value()
-      return _.keyBy(roomsNoMessages, r => r._id)
+      return {
+        data: _.keyBy(roomsNoMessages, r => r._id),
+        selectedRoom: _.get(rooms, '0._id', null)
+      }
     }
     default: {
       return state

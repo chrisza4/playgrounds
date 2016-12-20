@@ -1,11 +1,13 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 
 import MessageReducer from '../Messages/reducers'
+import RoomReducer from '../Rooms/reducers'
 import thunk from 'redux-thunk'
 
 export default function getStore () {
   const reducers = combineReducers({
-    messages: MessageReducer
+    messages: MessageReducer,
+    rooms: RoomReducer,
   })
   return createStore(
     reducers,
