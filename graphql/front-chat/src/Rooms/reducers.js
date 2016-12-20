@@ -16,6 +16,12 @@ export default function roomReducer (state = initialState, action) {
         selectedRoom: _.get(rooms, '0._id', null)
       }
     }
+    case Actions.ROOM_CHANGE: {
+      return {
+        ...state,
+        selectedRoom: action.roomId
+      }
+    }
     default: {
       return state
     }

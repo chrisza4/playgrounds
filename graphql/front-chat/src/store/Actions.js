@@ -1,3 +1,4 @@
 export default {
-  FETCH_STARTER: 'STARTER'
+  FETCH_STARTER: 'STARTER',
+  ROOM_CHANGE: 'ROOM_CHANGE'
 }

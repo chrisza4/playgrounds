@@ -41,9 +41,16 @@ const ChatRoomContainer = React.createClass({
   }
 })
 
+const messagesSelector = (state) => {
+  const currentRoomId = state.rooms.selectedRoom
+  if (!currentRoomId) return [ ]
+  const messages = _.get(state, 'messages.data', [ ])
+  return _.filter(messages, d => d.roomId === currentRoomId)
+}
+
 export default connect(
   (state, props) => ({
-    messages: _.get(state, 'messages.data', [ ])
+    messages: messagesSelector(state)
   }),
   (dispatch) => {
     return {

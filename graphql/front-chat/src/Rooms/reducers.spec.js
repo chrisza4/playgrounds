@@ -42,4 +42,15 @@ describe('Room reducer', () => {
     const actual = RoomReducer({}, action)
     expect(actual).toEqual(expected)
   })
+
+  it('change room correctly', () => {
+    const initialState = {
+      selectedRoom: 'xxx'
+    }
+    const actual = RoomReducer(initialState, {
+      type: 'ROOM_CHANGE',
+      roomId: 'room555'
+    })
+    expect(actual.selectedRoom).toEqual('room555')
+  })
 })

@@ -46,7 +46,7 @@ class App extends Component {
           <div>
             <ChatAppBarContainer onToggleDrawer={this.toggleDrawer} />
             <Drawer open={this.state.openDrawer} docked={true} onRequestChange={(e) => console.debug('====')}>
-              <RoomSelector />
+              <RoomSelector onToggleDrawer={this.toggleDrawer} />
             </Drawer>
             <div className='gc-main-layout'>
               <ChatRoomContainer />
