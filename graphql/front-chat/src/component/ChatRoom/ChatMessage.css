@@ -1,0 +1,6 @@
+.gc-chat-message {
+  margin-top: 15px;
+}
+.gc-chat-message__username {
+  font-weight: bold;
+}
