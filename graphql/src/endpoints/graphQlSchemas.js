@@ -10,8 +10,6 @@ import {
   GraphQLString,
 } from 'graphql'
 
-const ObjectId = require('bson-objectid')
-
 const messageType = new GraphQLObjectType({
   name: 'Message',
   fields: {
