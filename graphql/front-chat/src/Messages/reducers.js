@@ -29,6 +29,11 @@ export function MessageReducer(state = initialState, action) {
         }
       }
     }
+    case Actions.FETCH_ROOM: {
+      const messageWithRoom = action.data.map(d => ({ ...d, roomId: action.roomId }))
+      const newData = _.keyBy(messageWithRoom, t => t._id)
+      return Object.assign({ }, state, newData)
+    }
     default:
       return state
   }

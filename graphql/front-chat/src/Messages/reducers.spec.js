@@ -78,4 +78,27 @@ describe('Reducer', () => {
       }
     })
   })
+
+  it('should handle room fetching correctly', () => {
+    const oldState = {
+      'message1': {
+        _id: '1',
+        body: 'cccc',
+        ownerId: 'owner'
+      }
+    }
+    const action = {
+      type: Actions.FETCH_ROOM,
+      data: [
+        { _id: 'message1', body: 'chat new', ownerId: 'owner' },
+        { _id: 'message2', body: 'chat new2', ownerId: 'owner' },
+      ],
+      roomId: 'room5'
+    }
+    const actual = MessageReducer(oldState, action)
+    expect(actual).toEqual({
+      'message1': { _id: 'message1', body: 'chat new', ownerId: 'owner', roomId: 'room5' },
+      'message2': { _id: 'message2', body: 'chat new2', ownerId: 'owner', roomId: 'room5' },
+    })
+  })
 })

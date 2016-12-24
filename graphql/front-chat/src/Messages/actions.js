@@ -2,16 +2,24 @@ import Actions from '../store/Actions'
 import axios from 'axios'
 
 export function fetchMessage () {
-  axios.post('http://localhost:4000/api/graphql', {
-    query:`
-      {
-        messages(roomId: "555") {
-          _id
-          body
+  return dispatch => {
+    axios.post('http://localhost:4000/api/graphql', {
+      query:`
+        {
+          messages(roomId: "555") {
+            _id
+            body
+          }
         }
-      }
-    `
-  }).then(response => console.log(response))
+      `
+    }).then((response) => {
+      console.log('R:', response)
+      dispatch({
+        type: Actions.MESSAGE_FETCHED,
+        data: null
+      })
+    })
+  }
 }
 
 export function createMessage (body, roomId, opts) {

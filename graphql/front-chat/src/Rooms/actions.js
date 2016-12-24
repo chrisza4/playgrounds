@@ -16,12 +16,14 @@ export function fetchRoom (roomId) {
         messages(roomId: "${roomId}") {
           _id
           body
+          ownerId
         }
       }`
     })
     dispatch({
-      type: 'FETCH_ROOM',
-      data: fetchResult.data.data.messages
+      type: Actions.FETCH_ROOM,
+      data: fetchResult.data.data.messages,
+      roomId
     })
   }
 }

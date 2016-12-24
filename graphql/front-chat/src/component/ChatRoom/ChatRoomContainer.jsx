@@ -67,6 +67,7 @@ const ChatRoomContainer = React.createClass({
               onKeyDown={this.onTextKeyDown}
             />
             <FlatButton label='Send' primary onClick={this.onMessageCreated} />
+            <FlatButton label='Fetch' primary onClick={() => this.onMessageCreated} />
           </div>
         </div>
       </div>
