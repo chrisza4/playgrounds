@@ -1,5 +1,7 @@
 import './ChatRoomContainer.css'
 
+import * as MessageActions from '../../Messages/actions.js'
+
 import ChatMessage from './ChatMessage'
 import FlatButton from 'material-ui/FlatButton'
 import React from 'react'
@@ -13,9 +15,16 @@ const ChatRoomContainer = React.createClass({
 
   propTypes: {
     messages: React.PropTypes.array,
+    currentRoomId: React.PropTypes.string,
     isFetched: React.PropTypes.bool,
     onFetchStarter: React.PropTypes.func,
     onFetchRoom: React.PropTypes.func
+  },
+
+  getInitialState () {
+    return {
+      textValue: ''
+    }
   },
 
   componentDidMount () {
@@ -30,14 +39,34 @@ const ChatRoomContainer = React.createClass({
     ))
   },
 
+  onMessageCreated () {
+    this.props.onMessageCreated(this.state.textValue, this.props.currentRoomId)
+    this.setState({ textValue: '' })
+  },
+
+  onTextChange (e) {
+    this.setState({ textValue: e.target.value })
+  },
+
+  onTextKeyDown (e) {
+    if (e.keyCode === 13) {
+      this.onMessageCreated()
+    }
+  },
+
   render () {
     return (
       <div style={{height: '100%'}}>
         <div className='gc-chat-room-container' style={{height: '100%'}}>
           {this.renderMessages()}
           <div className='gc-chat-text'>
-            <FlatButton label='click' primary onClick={() => this.props.onFetchRoom('584e8e4c8957b62a77d71cad')} />
-            <TextField hintText='Enter your message here..' />
+            <TextField
+              hintText='Enter your message here..'
+              value={this.state.textValue}
+              onChange={this.onTextChange}
+              onKeyDown={this.onTextKeyDown}
+            />
+            <FlatButton label='Send' primary onClick={this.onMessageCreated} />
           </div>
         </div>
       </div>
@@ -54,12 +83,14 @@ const messagesSelector = (state) => {
 
 export default connect(
   (state, props) => ({
-    messages: messagesSelector(state)
+    messages: messagesSelector(state),
+    currentRoomId: state.rooms.selectedRoom
   }),
   (dispatch) => {
     return {
       onFetchStarter: () => dispatch(fetchStarter()),
-      onFetchRoom: (roomId) => dispatch(fetchRoom(roomId))
+      onFetchRoom: (roomId) => dispatch(fetchRoom(roomId)),
+      onMessageCreated: (...args) => dispatch(MessageActions.createMessage(...args))
     }
   }
 )(ChatRoomContainer)

@@ -1,3 +1,4 @@
+import Actions from '../store/Actions'
 import { MessageReducer } from './reducers'
 
 describe('Test sanity', () => {
@@ -55,6 +56,26 @@ describe('Reducer', () => {
       }
       const actual = MessageReducer(initialState, action)
       expect(actual).toEqual(expected)
+    })
+  })
+
+  it('should handle message create correctly', () => {
+    const actual = MessageReducer({ }, {
+      type: Actions.MESSAGE_CREATED,
+      data: {
+        _id: '1',
+        body: 'cccc',
+        ownerId: 'owner'
+      },
+      roomId: 'room1'
+    })
+    expect(actual).toEqual({
+      '1': {
+        _id: '1',
+        body: 'cccc',
+        roomId: 'room1',
+        ownerId: 'owner'
+      }
     })
   })
 })

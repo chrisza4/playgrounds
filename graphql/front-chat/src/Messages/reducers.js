@@ -20,6 +20,15 @@ export function MessageReducer(state = initialState, action) {
       }, [ ])
       return _.keyBy(messagesArray, t => t._id)
     }
+    case Actions.MESSAGE_CREATED: {
+      return {
+        ...state,
+        [action.data._id]: {
+          ...action.data,
+          roomId: action.roomId
+        }
+      }
+    }
     default:
       return state
   }
