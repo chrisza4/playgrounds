@@ -13,7 +13,6 @@ export function fetchMessage () {
         }
       `
     }).then((response) => {
-      console.log('R:', response)
       dispatch({
         type: Actions.MESSAGE_FETCHED,
         data: null

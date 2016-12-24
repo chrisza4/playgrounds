@@ -66,9 +66,6 @@ describe('Room endpoint query tests', () => {
         }
       }`
       const createResult = await graphql(schemas, query)
-      if (createResult.errors) {
-        console.log(JSON.stringify(createResult.errors, false, 2))
-      }
       assert.equal(createResult.data.createMessage.body, 'HELLO')
 
       const roomQuery = `query {

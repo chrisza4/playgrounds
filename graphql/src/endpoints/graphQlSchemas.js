@@ -8,10 +8,8 @@ import {
   GraphQLList,
   GraphQLObjectType,
   GraphQLSchema,
-  GraphQLString,
+  GraphQLString
 } from 'graphql'
-
-import { publishChanges } from './event'
 
 const messageType = new GraphQLObjectType({
   name: 'Message',
