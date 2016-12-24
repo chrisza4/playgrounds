@@ -10,6 +10,12 @@ export function findById (userId) {
   }).lean()
 }
 
+export function findByEmail (email) {
+  return UserModel.findOne({
+    email
+  }).lean()
+}
+
 export function findAll () {
   return UserModel.find({}).lean()
 }

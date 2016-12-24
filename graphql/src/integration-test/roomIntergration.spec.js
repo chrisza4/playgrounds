@@ -1,19 +1,18 @@
-import assert from 'power-assert'
-import { graphql } from 'graphql'
-
 import * as MessageService from '../services/messageService'
-import * as UserService from '../services/userService'
 import * as RoomService from '../services/roomService'
+import * as UserService from '../services/userService'
 
+import assert from 'power-assert'
 import connect from '../db'
+import { graphql } from 'graphql'
 import schemas from '../endpoints/graphQlSchemas'
 
 describe('Room endpoint query tests', () => {
-  let room2
+  let room2, user
 
   before(async () => {
     await connect()
-    const user = await UserService.createUser({ email: 'test@test.com' })
+    user = await UserService.createUser({ email: 'test@test.com' })
     const room = await RoomService.createRoom('Test room')
     await MessageService.createMessage({
       body: 'Message1',
@@ -52,5 +51,37 @@ describe('Room endpoint query tests', () => {
     const result = await graphql(schemas, query)
     assert(result.data.messages.length === 1)
     assert.equal(result.data.messages[0].body, 'Message in room2')
+  })
+
+  describe('message mutation', () => {
+    it('should be able to create message', async () => {
+      const query = `mutation {
+        createMessage(message: {
+          body: "HELLO",
+          roomId: "${String(room2._id)}"
+          email: "test@test.com"
+        }) {
+          _id
+          body
+        }
+      }`
+      const createResult = await graphql(schemas, query)
+      if (createResult.errors) {
+        console.log(JSON.stringify(createResult.errors, false, 2))
+      }
+      assert.equal(createResult.data.createMessage.body, 'HELLO')
+
+      const roomQuery = `query {
+        messages(roomId: "${String(room2._id)}") {
+          _id
+          body
+          ownerId
+        }
+      }`
+      const result = await graphql(schemas, roomQuery)
+      assert(result.data.messages.length === 2)
+      const newMessage = result.data.messages.find(d => d.body === 'HELLO')
+      assert.equal(newMessage.ownerId, String(user._id))
+    })
   })
 })

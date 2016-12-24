@@ -1,13 +1,13 @@
+import Http from 'http'
+import cors from 'cors'
 // const express = require('express')
 // const graphqlHTTP = require('express-graphql')
 // const { buildSchema } = require('graphql')
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import schema from './graphQlSchemas'
 import io from 'socket.io'
-import Http from 'http'
 import proxy from 'express-http-proxy'
-import cors from 'cors'
+import schema from './graphQlSchemas'
 
 export default function createServer () {
   createExpressServer()
@@ -29,7 +29,11 @@ function createExpressServer () {
   backendApp.options('/graphql', cors(corsOptions))
   backendApp.use('/graphql', graphqlHTTP({
     schema: schema,
-    rootValue: { },
+    rootValue: {
+      createMessage: (input) => {
+        return input
+      }
+    },
     graphiql: true
   }))
   const server = Http.Server(backendApp)

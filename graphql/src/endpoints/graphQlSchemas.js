@@ -1,14 +1,16 @@
-import {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLList
-} from 'graphql'
-
 import * as MessageService from '../services/messageService'
 import * as RoomService from '../services/roomService'
 import * as UserService from '../services/userService'
 
+import {
+  GraphQLInputObjectType,
+  GraphQLList,
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLString,
+} from 'graphql'
+
+const ObjectId = require('bson-objectid')
 
 const messageType = new GraphQLObjectType({
   name: 'Message',
@@ -20,6 +22,10 @@ const messageType = new GraphQLObjectType({
     body: {
       type: GraphQLString,
       description: 'message body'
+    },
+    ownerId: {
+      type: GraphQLString,
+      description: 'owner'
     }
   }
 })
@@ -87,8 +93,38 @@ export const queryType = new GraphQLObjectType({
   }
 })
 
-const schemas = new GraphQLSchema({
-  query: queryType
+const messageInput = new GraphQLInputObjectType({
+  name: 'messageInput',
+  fields: {
+    body: { type: GraphQLString },
+    roomId: { type: GraphQLString },
+    email: { type: GraphQLString }
+  }
+})
+
+export const mutationType = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    createMessage: {
+      type: messageType,
+      args: {
+        message: { type: messageInput }
+      },
+      resolve: async (root, { message }) => {
+        const user = await UserService.findByEmail(message.email)
+        const toSave = {
+          body: message.body,
+          roomId: message.roomId
+        }
+        return MessageService.createMessage(toSave, String(user._id))
+      }
+    }
+  }
+})
+
+export const schemas = new GraphQLSchema({
+  query: queryType,
+  mutation: mutationType
 })
 
 export default schemas
