@@ -1,3 +1,4 @@
+import * as MessageEndpoints from './messageEndpoints'
 import * as MessageService from '../services/messageService'
 import * as RoomService from '../services/roomService'
 import * as UserService from '../services/userService'
@@ -9,6 +10,8 @@ import {
   GraphQLSchema,
   GraphQLString,
 } from 'graphql'
+
+import { publishChanges } from './event'
 
 const messageType = new GraphQLObjectType({
   name: 'Message',
@@ -109,12 +112,7 @@ export const mutationType = new GraphQLObjectType({
         message: { type: messageInput }
       },
       resolve: async (root, { message }) => {
-        const user = await UserService.findByEmail(message.email)
-        const toSave = {
-          body: message.body,
-          roomId: message.roomId
-        }
-        return MessageService.createMessage(toSave, String(user._id))
+        return MessageEndpoints.createMessageEndpoint(message)
       }
     }
   }

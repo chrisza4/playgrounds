@@ -1,12 +1,11 @@
 import Http from 'http'
 import cors from 'cors'
-// const express = require('express')
-// const graphqlHTTP = require('express-graphql')
-// const { buildSchema } = require('graphql')
 import express from 'express'
+import getEventbus from './event'
 import graphqlHTTP from 'express-graphql'
 import io from 'socket.io'
 import proxy from 'express-http-proxy'
+import registerEventBus from './registerEventBus'
 import schema from './graphQlSchemas'
 
 export default function createServer () {
@@ -45,5 +44,7 @@ function createExpressServer () {
   socketIO.on('connection', socket => {
     console.log('USER CONNECTED')
   })
+
+  registerEventBus(getEventbus(), socketIO)
 }
 
