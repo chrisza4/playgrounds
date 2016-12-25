@@ -40,3 +40,14 @@ export async function createMessage (message, ownerId, deps) {
     ownerId
   })
 }
+
+export async function clearMessageByRoomId (roomId, deps) {
+  deps = Object.assign({
+    remove: MessageModel.remove.bind(MessageModel)
+  })
+
+  T.String(roomId)
+  return deps.remove({
+    roomId
+  })
+}

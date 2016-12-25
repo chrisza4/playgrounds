@@ -4,11 +4,11 @@ import Sinon from 'sinon'
 
 import * as MessageService from './messageService'
 import * as UserService from './userService'
+import * as RoomService from './roomService'
 
 import connect from '../db'
 
 describe('Create message', () => {
-
   let testUser
 
   before(async () => {
@@ -55,5 +55,43 @@ describe('Create message', () => {
     const messageCreated = deps.create.args[0][0]
     assert(messageCreated.body === messageToCreate.body)
     assert(messageCreated.roomId === messageToCreate.roomId)
+  })
+})
+
+describe('Clear message', () => {
+  let testRoom, roomNotDeleted
+
+  before(async () => {
+    await connect()
+    const testUser = await UserService.createUser({ email: 'hahaha@xxx.com' })
+    testRoom = await RoomService.createRoom('test room')
+    roomNotDeleted = await RoomService.createRoom('test room2')
+    await MessageService.createMessage({
+      body: 'message1',
+      roomId: String(testRoom._id)
+    }, String(testUser._id))
+    await MessageService.createMessage({
+      body: 'message2',
+      roomId: String(testRoom._id)
+    }, String(testUser._id))
+    await MessageService.createMessage({
+      body: 'message3',
+      roomId: String(roomNotDeleted._id)
+    }, String(testUser._id))
+  })
+
+  it('should validate room id', done => {
+    MessageService.clearMessageByRoomId(null)
+    .then(() => done('should validate'))
+    .catch(() => done())
+  })
+
+  it('should delete all message by room id', async () => {
+    await MessageService.clearMessageByRoomId(String(testRoom._id))
+    const msgRoom1 = await MessageService.getMessageByRoomId(String(testRoom._id))
+    assert.equal(msgRoom1.length, 0)
+
+    const msgRoom2 = await MessageService.getMessageByRoomId(String(roomNotDeleted._id))
+    assert.equal(msgRoom2.length, 1)
   })
 })
