@@ -11,6 +11,10 @@ const userSchemas = new Mongoose.Schema({
     type: Date,
     default: Date.now,
     index: true
+  },
+  accessToken: {
+    type: String,
+    index: true
   }
 })
 

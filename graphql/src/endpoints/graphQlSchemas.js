@@ -112,6 +112,15 @@ export const mutationType = new GraphQLObjectType({
       resolve: async (root, { message }) => {
         return MessageEndpoints.createMessageEndpoint(message)
       }
+    },
+    authForToken: {
+      type: GraphQLString,
+      args: {
+        email: { type: GraphQLString }
+      },
+      resolve: async (root, { email }) => {
+        return UserService.authForToken(email)
+      }
     }
   }
 })
