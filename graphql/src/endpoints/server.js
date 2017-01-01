@@ -47,4 +47,3 @@ function createExpressServer () {
 
   registerEventBus(getEventbus(), socketIO)
 }
-

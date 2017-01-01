@@ -4,17 +4,12 @@ import axios from 'axios'
 export function doAuth (email) {
   return dispatch => {
     axios.post('http://localhost:4000/api/graphql', {
-      query:`
-        {
-          messages(roomId: "555") {
-            _id
-            body
-          }
-        }
-      `
+      mutation:`{
+        authForToken(email: "${email}")
+      }`
     }).then((response) => {
       dispatch({
-        type: Actions.MESSAGE_FETCHED,
+        type: Actions.AUTH,
         data: null
       })
     })
