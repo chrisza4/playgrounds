@@ -8,6 +8,7 @@ import React from 'react'
 import TextField from 'material-ui/TextField'
 import _ from 'lodash'
 import { connect } from 'react-redux'
+import { doAuth } from '../../Auth/actions.js'
 import { fetchRoom } from '../../Rooms/actions.js'
 import { fetchStarter } from '../../store/AppActions.js'
 
@@ -18,7 +19,8 @@ const ChatRoomContainer = React.createClass({
     currentRoomId: React.PropTypes.string,
     isFetched: React.PropTypes.bool,
     onFetchStarter: React.PropTypes.func,
-    onFetchRoom: React.PropTypes.func
+    onFetchRoom: React.PropTypes.func,
+    onAuth: React.PropTypes.func,
   },
 
   getInitialState () {
@@ -68,6 +70,7 @@ const ChatRoomContainer = React.createClass({
             />
             <FlatButton label='Send' primary onClick={this.onMessageCreated} />
             <FlatButton label='Fetch' primary onClick={() => this.onMessageCreated} />
+            <FlatButton label='Auth' primary onClick={() => this.props.onAuth('testmail@testmail.com')} />
           </div>
         </div>
       </div>
@@ -91,7 +94,8 @@ export default connect(
     return {
       onFetchStarter: () => dispatch(fetchStarter()),
       onFetchRoom: (roomId) => dispatch(fetchRoom(roomId)),
-      onMessageCreated: (...args) => dispatch(MessageActions.createMessage(...args))
+      onMessageCreated: (...args) => dispatch(MessageActions.createMessage(...args)),
+      onAuth: (email) => dispatch(doAuth(email))
     }
   }
 )(ChatRoomContainer)
