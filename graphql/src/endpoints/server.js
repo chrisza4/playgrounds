@@ -1,3 +1,4 @@
+import Config from '../config'
 import Http from 'http'
 import cors from 'cors'
 import express from 'express'
@@ -7,6 +8,7 @@ import io from 'socket.io'
 import proxy from 'express-http-proxy'
 import registerEventBus from './registerEventBus'
 import schema from './graphQlSchemas'
+import socketioJwt from 'socketio-jwt'
 
 export default function createServer () {
   createExpressServer()
@@ -41,8 +43,15 @@ function createExpressServer () {
   server.listen(4001)
   console.log('Running a GraphQL API server at localhost:4001/api/graphql')
 
-  socketIO.on('connection', socket => {
-    console.log('USER CONNECTED')
+  socketIO.on('connection', socketioJwt.authorize({
+    secret: Config.SECRET,
+    timeout: 15000
+  }))
+  socketIO.on('connection', () => {
+    console.log('Guest connected, wait for authentication....')
+  })
+  socketIO.on('authenticated', (socket) => {
+    console.log(`${socket.decoded_token.email} connected`)
   })
 
   registerEventBus(getEventbus(), socketIO)
