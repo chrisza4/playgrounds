@@ -10,16 +10,20 @@ import UIKit
 
 class RedView: UIView {
 
-    /*
+  
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+  
+  public var helloText: String = "Hello v1"
+  
+  override func draw(_ rect: CGRect) {
+    lblTitle.text = helloText
+  }
+ 
 
   @IBOutlet weak var lblTitle: UILabel!
   @IBOutlet weak var btnSayHi: UIButton!
+  
   
   @IBAction func hiClicked(_ sender: Any) {
     self.lblTitle.text = "Hello user"

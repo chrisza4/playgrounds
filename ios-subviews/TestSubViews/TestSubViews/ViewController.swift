@@ -15,16 +15,21 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.loadViewFromNibIntoSubview(topView, nibNamed: "RedView")
+    let redView = self.loadViewFromNibIntoSubview(topView, nibNamed: "RedView") as! RedView
+    redView.helloText = "Hello v2 from ViewController"
     self.loadViewFromNibIntoSubview(bottomView, nibNamed: "BlueView")
   }
   
-  func loadViewFromNibIntoSubview(_ view: UIView, nibNamed: String) {
+  @discardableResult
+  func loadViewFromNibIntoSubview(_ view: UIView, nibNamed: String) -> UIView? {
     if let subView = Bundle.main.loadNibNamed(nibNamed, owner: self, options: nil)!.first as? UIView {
       view.addSubview(subView)
       subView.translatesAutoresizingMaskIntoConstraints = false
       view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":subView]))
       view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view":subView]))
+      return subView
+    } else {
+      return nil
     }
   }
 
