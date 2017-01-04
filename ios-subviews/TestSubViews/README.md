@@ -2,7 +2,7 @@
 
 Very simple things, try to put multiple subview from multiple XIB into one view
 
-There are main viewController, BlueView and RedViewใ
+There are main viewController, BlueView and RedView.
 
 I found that Swift way to integrate programmatically subview from XIB into larger view is kinda messy, so I wrote `loadViewFromNibIntoSubview` instead.
 
