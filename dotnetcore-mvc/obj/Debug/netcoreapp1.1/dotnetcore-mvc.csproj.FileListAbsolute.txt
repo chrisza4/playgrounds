@@ -1,0 +1,8 @@
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/bin/Debug/netcoreapp1.1/dotnetcore-mvc.deps.json
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/bin/Debug/netcoreapp1.1/dotnetcore-mvc.runtimeconfig.json
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/bin/Debug/netcoreapp1.1/dotnetcore-mvc.runtimeconfig.dev.json
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/bin/Debug/netcoreapp1.1/dotnetcore-mvc.dll
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/bin/Debug/netcoreapp1.1/dotnetcore-mvc.pdb
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/obj/Debug/netcoreapp1.1/dotnetcore-mvc.AssemblyInfo.cs
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/obj/Debug/netcoreapp1.1/dotnetcore-mvc.dll
+/Users/chrisza/Dev/test/playgrounds/dotnetcore-mvc/obj/Debug/netcoreapp1.1/dotnetcore-mvc.pdb
