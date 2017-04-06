@@ -72,7 +72,18 @@ final class BeerDetailViewController: UIViewController {
 extension BeerDetailViewController {
   
   @IBAction func share(_ sender: AnyObject) {
+    guard let detailBeer = detailBeer,
+      let url = detailBeer.exportToFileURL() else {
+        return
+    }
     
+    let activityViewController = UIActivityViewController(
+      activityItems: ["Check out this beer I liked using Beer Tracker.", url],
+      applicationActivities: nil)
+    if let popoverPresentationController = activityViewController.popoverPresentationController {
+      popoverPresentationController.barButtonItem = (sender as! UIBarButtonItem)
+    }
+    present(activityViewController, animated: true, completion: nil)
   }
   
   @IBAction func pickPhoto(_ sender: AnyObject) {

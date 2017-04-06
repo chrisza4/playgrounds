@@ -100,7 +100,31 @@ extension Beer {
 extension Beer {
   
   func exportToFileURL() -> URL? {
-    return nil
+    // 1
+    var contents: [String : Any] = [Keys.Name.rawValue: name, Keys.Rating.rawValue: rating]
+    
+    // 2
+    if let image = beerImage() {
+      if let data = UIImageJPEGRepresentation(image, 1) {
+        contents[Keys.ImagePath.rawValue] = data.base64EncodedString()
+      }
+    }
+    
+    // 3
+    if let note = note {
+      contents[Keys.Note.rawValue] = note
+    }
+    
+    // 4
+    guard let path = FileManager.default
+      .urls(for: .documentDirectory, in: .userDomainMask).first else {
+        return nil
+    }
+    
+    // 5
+    let saveFileURL = path.appendingPathComponent("/\(name).btkr")
+    (contents as NSDictionary).write(to: saveFileURL, atomically: true)
+    return saveFileURL
   }
 }
 
@@ -108,6 +132,33 @@ extension Beer {
 extension Beer {
   
   static func importData(from url: URL) {
+    // 1
+    guard let dictionary = NSDictionary(contentsOf: url),
+      let beerInfo = dictionary as? [String: AnyObject],
+      let name = beerInfo[Keys.Name.rawValue] as? String,
+      let rating = beerInfo[Keys.Rating.rawValue] as? NSNumber else {
+        return
+    }
     
+    // 2
+    let beer = Beer(name: name, note: beerInfo[Keys.Note.rawValue] as? String, rating: rating.intValue)
+    
+    // 3
+    if let base64 = beerInfo[Keys.ImagePath.rawValue] as? String,
+      let imageData = Data(base64Encoded: base64, options: .ignoreUnknownCharacters),
+      let image = UIImage(data: imageData) {
+      beer.saveImage(image)
+    }
+    
+    // 4
+    BeerManager.sharedInstance.beers.append(beer)
+    BeerManager.sharedInstance.saveBeers()
+    
+    // 5
+    do {
+      try FileManager.default.removeItem(at: url)
+    } catch {
+      print("Failed to remove item from Inbox")
+    }
   }
 }

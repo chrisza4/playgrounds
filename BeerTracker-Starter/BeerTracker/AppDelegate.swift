@@ -30,4 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     return true
   }
+  
+  // MARK: - Handle File Sharing
+  func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    // 1
+    guard url.pathExtension == "btkr" else { return false }
+    
+    // 2
+    Beer.importData(from: url)
+    
+    // 3
+    guard let navigationController = window?.rootViewController as? UINavigationController,
+      let beerTableViewController = navigationController.viewControllers.first as? BeersTableViewController else {
+        return true
+    }
+    
+    // 4
+    beerTableViewController.tableView.reloadData()
+    return true
+  }
 }

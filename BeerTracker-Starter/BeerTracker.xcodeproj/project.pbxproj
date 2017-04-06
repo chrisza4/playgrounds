@@ -21,7 +21,34 @@
 		17448E221CB11FDC00EC277B /* BeersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17448E111CB11FDC00EC277B /* BeersTableViewController.swift */; };
 		17448E251CB11FDC00EC277B /* STRatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17448E151CB11FDC00EC277B /* STRatingControl.swift */; };
 		17DDE69A1CCBA10C002CF776 /* BeerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DDE6991CCBA10C002CF776 /* BeerManager.swift */; };
+		B1CAE5911E90E74A00383AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CAE5901E90E74A00383AB1 /* ShareViewController.swift */; };
+		B1CAE5941E90E74A00383AB1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B1CAE5921E90E74A00383AB1 /* MainInterface.storyboard */; };
+		B1CAE5981E90E74A00383AB1 /* BeerTrackerShare.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B1CAE58E1E90E74A00383AB1 /* BeerTrackerShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B1CAE5961E90E74A00383AB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17448DC81CAEF0EE00EC277B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1CAE58D1E90E74A00383AB1;
+			remoteInfo = BeerTrackerShare;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B1CAE59C1E90E74A00383AB1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B1CAE5981E90E74A00383AB1 /* BeerTrackerShare.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		17448DD01CAEF0EE00EC277B /* BeerTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeerTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,10 +67,21 @@
 		17448E141CB11FDC00EC277B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17448E151CB11FDC00EC277B /* STRatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STRatingControl.swift; sourceTree = "<group>"; };
 		17DDE6991CCBA10C002CF776 /* BeerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = BeerManager.swift; sourceTree = "<group>"; tabWidth = 2; };
+		B1CAE58E1E90E74A00383AB1 /* BeerTrackerShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BeerTrackerShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1CAE5901E90E74A00383AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B1CAE5931E90E74A00383AB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		B1CAE5951E90E74A00383AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		17448DCD1CAEF0EE00EC277B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CAE58B1E90E74A00383AB1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -57,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				17448E021CB11FDC00EC277B /* BeerTracker */,
+				B1CAE58F1E90E74A00383AB1 /* BeerTrackerShare */,
 				17448DD11CAEF0EE00EC277B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				17448DD01CAEF0EE00EC277B /* BeerTracker.app */,
+				B1CAE58E1E90E74A00383AB1 /* BeerTrackerShare.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +171,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B1CAE58F1E90E74A00383AB1 /* BeerTrackerShare */ = {
+			isa = PBXGroup;
+			children = (
+				B1CAE5901E90E74A00383AB1 /* ShareViewController.swift */,
+				B1CAE5921E90E74A00383AB1 /* MainInterface.storyboard */,
+				B1CAE5951E90E74A00383AB1 /* Info.plist */,
+			);
+			path = BeerTrackerShare;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,15 +191,34 @@
 				17448DCC1CAEF0EE00EC277B /* Sources */,
 				17448DCD1CAEF0EE00EC277B /* Frameworks */,
 				17448DCE1CAEF0EE00EC277B /* Resources */,
+				B1CAE59C1E90E74A00383AB1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B1CAE5971E90E74A00383AB1 /* PBXTargetDependency */,
 			);
 			name = BeerTracker;
 			productName = BeerTrack;
 			productReference = 17448DD01CAEF0EE00EC277B /* BeerTracker.app */;
 			productType = "com.apple.product-type.application";
+		};
+		B1CAE58D1E90E74A00383AB1 /* BeerTrackerShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1CAE59B1E90E74A00383AB1 /* Build configuration list for PBXNativeTarget "BeerTrackerShare" */;
+			buildPhases = (
+				B1CAE58A1E90E74A00383AB1 /* Sources */,
+				B1CAE58B1E90E74A00383AB1 /* Frameworks */,
+				B1CAE58C1E90E74A00383AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeerTrackerShare;
+			productName = BeerTrackerShare;
+			productReference = B1CAE58E1E90E74A00383AB1 /* BeerTrackerShare.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -157,13 +226,17 @@
 		17448DC81CAEF0EE00EC277B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Ray Wenderlich";
 				TargetAttributes = {
 					17448DCF1CAEF0EE00EC277B = {
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0800;
+					};
+					B1CAE58D1E90E74A00383AB1 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -181,6 +254,7 @@
 			projectRoot = "";
 			targets = (
 				17448DCF1CAEF0EE00EC277B /* BeerTracker */,
+				B1CAE58D1E90E74A00383AB1 /* BeerTrackerShare */,
 			);
 		};
 /* End PBXProject section */
@@ -197,6 +271,14 @@
 				17448E181CB11FDC00EC277B /* LaunchScreen.storyboard in Resources */,
 				17448E1E1CB11FDC00EC277B /* beerMug_22.png in Resources */,
 				17448E201CB11FDC00EC277B /* beerMug_44.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CAE58C1E90E74A00383AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1CAE5941E90E74A00383AB1 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +299,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B1CAE58A1E90E74A00383AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1CAE5911E90E74A00383AB1 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B1CAE5971E90E74A00383AB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1CAE58D1E90E74A00383AB1 /* BeerTrackerShare */;
+			targetProxy = B1CAE5961E90E74A00383AB1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		17448E051CB11FDC00EC277B /* LaunchScreen.storyboard */ = {
@@ -234,6 +332,14 @@
 				17448E081CB11FDC00EC277B /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B1CAE5921E90E74A00383AB1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B1CAE5931E90E74A00383AB1 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -332,6 +438,7 @@
 		17448DE81CAEF0EF00EC277B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BeerTracker/Info.plist;
@@ -345,12 +452,46 @@
 		17448DE91CAEF0EF00EC277B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BeerTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.BeerTracker;
 				PRODUCT_NAME = BeerTracker;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		B1CAE5991E90E74A00383AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = BeerTrackerShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.BeerTracker.BeerTrackerShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B1CAE59A1E90E74A00383AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = BeerTrackerShare/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.BeerTracker.BeerTrackerShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -375,6 +516,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		B1CAE59B1E90E74A00383AB1 /* Build configuration list for PBXNativeTarget "BeerTrackerShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1CAE5991E90E74A00383AB1 /* Debug */,
+				B1CAE59A1E90E74A00383AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
