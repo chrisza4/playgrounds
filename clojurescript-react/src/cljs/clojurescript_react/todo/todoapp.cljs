@@ -14,15 +14,18 @@
     [:div{:class "todoapp"}
       [todo-header/todo-header {:on-save todo-state/add}]
       [:ul {:class "todo-list"}
-       (map
+       (doall
+        (map
          #(let [{:keys [editing completed title id]} %]
                (todo-item/todo-item-component {:editing editing
                                                :completed completed
                                                :title title
                                                :on-toggle todo-state/toggle
                                                :on-delete todo-state/delete
+                                               :on-edit todo-state/toggle-edit
+                                               :on-edit-title todo-state/edit
                                                :key id}))
-         (vals (:items props)))]]])
+         (vals (:items props))))]]])
 
 (defn todo-app []
   (todo-board {:items @todo-state/todo-data}))

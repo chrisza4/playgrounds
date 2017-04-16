@@ -15,3 +15,9 @@
 
 (defn delete [id]
   (swap! todo-data dissoc id))
+
+(defn toggle-edit [id]
+  (swap! todo-data update-in [id :editing] not))
+
+(defn edit [id title]
+  (swap! todo-data assoc-in [id :title] title))
