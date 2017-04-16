@@ -1,7 +1,12 @@
 (ns todomvc.core.item
   (:require [reagent.core :as r]))
 
-(defn todo-item-component [{:keys [editing completed title key]}]
+(defn todo-item-component [{:keys [editing
+                                   completed
+                                   title
+                                   key
+                                   on-toggle
+                                   on-delete]}]
   [:li {:key key
         :class (clojure.string/join
                  " "
@@ -11,6 +16,8 @@
     [:div {:class "view"}
      [:input {:class "toggle"
               :type "checkbox"
-              :checked completed}]
+              :checked completed
+              :on-change #(on-toggle key)}]
      [:label title]
-     [:button {:class "destroy"}]]])
+     [:button {:class "destroy"
+               :on-click #(on-delete key)}]]])

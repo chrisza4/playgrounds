@@ -5,20 +5,22 @@
             [todomvc.state :as todo-state]))
 
 (defonce init (do
-                (todo-state/add-todo "Red")
-                (todo-state/add-todo "Green")
-                (todo-state/add-todo "Refactor")))
+                (todo-state/add "Red")
+                (todo-state/add "Green")
+                (todo-state/add "Refactor")))
 
 (defn todo-board [props]
   [:div
     [:div{:class "todoapp"}
-      [todo-header/todo-header {:on-save todo-state/add-todo}]
+      [todo-header/todo-header {:on-save todo-state/add}]
       [:ul {:class "todo-list"}
        (map
          #(let [{:keys [editing completed title id]} %]
                (todo-item/todo-item-component {:editing editing
                                                :completed completed
                                                :title title
+                                               :on-toggle todo-state/toggle
+                                               :on-delete todo-state/delete
                                                :key id}))
          (vals (:items props)))]]])
 
