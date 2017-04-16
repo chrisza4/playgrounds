@@ -2,22 +2,17 @@
   (:require [reagent.core :as r]
             [todomvc.core.header :as todo-header]
             [todomvc.core.item :as todo-item]
-            [cljs-uuid-utils.core :as uuid]))
+            [todomvc.state :as todo-state]))
 
-(def todo-data (r/atom (array-map)))
-
-(defn add-todo [title]
-  (let [new-uuid (uuid/uuid-string (uuid/make-random-uuid))]
-       (swap! todo-data assoc new-uuid {:id new-uuid :title title})))
-
-(add-todo "Red")
-(add-todo "Green")
-(add-todo "Refactor")
+(defonce init (do
+                (todo-state/add-todo "Red")
+                (todo-state/add-todo "Green")
+                (todo-state/add-todo "Refactor")))
 
 (defn todo-board [props]
   [:div
     [:div{:class "todoapp"}
-      [todo-header/todo-header {:on-save #(js/alert "save")}]
+      [todo-header/todo-header {:on-save todo-state/add-todo}]
       [:ul {:class "todo-list"}
        (map
          #(let [{:keys [editing completed title id]} %]
@@ -28,4 +23,4 @@
          (vals (:items props)))]]])
 
 (defn todo-app []
-  (todo-board {:items @todo-data}))
+  (todo-board {:items @todo-state/todo-data}))
