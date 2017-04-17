@@ -2,6 +2,7 @@
   (:require [reagent.core :as r]
             [todomvc.core.header :as todo-header]
             [todomvc.core.item :as todo-item]
+            [todomvc.footer :as todo-footer]
             [todomvc.state :as todo-state]))
 
 (defonce init (do
@@ -9,9 +10,18 @@
                 (todo-state/add "Green")
                 (todo-state/add "Refactor")))
 
-(defn todo-board [props]
-  [:div
-    [:div{:class "todoapp"}
+(defn filter-todo [todos type]
+  (case type
+    "all" todos
+    "active" (filter #(not (:completed %)) todos)
+    "completed" (filter #(:completed %) todos)))
+
+(defn todo-board []
+ (let [todo-filter (r/atom "all")]
+  (fn [{:keys [items]}]
+   (let [filtered-todos (filter-todo (vals items) @todo-filter)]
+    [:div
+     [:div{:class "todoapp"}
       [todo-header/todo-header {:on-save todo-state/add}]
       [:ul {:class "todo-list"}
        (doall
@@ -25,7 +35,10 @@
                                                :on-edit todo-state/toggle-edit
                                                :on-edit-title todo-state/edit
                                                :key id}))
-         (vals (:items props))))]]])
+         filtered-todos))]
+      [todo-footer/todo-footer {:count (count (filter-todo filtered-todos "active"))
+                                :filter @todo-filter
+                                :on-filter #(reset! todo-filter %)}]]]))))
 
 (defn todo-app []
-  (todo-board {:items @todo-state/todo-data}))
+  [todo-board {:items @todo-state/todo-data}])

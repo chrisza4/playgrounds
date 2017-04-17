@@ -10,8 +10,9 @@
 
 (defn home-page []
   [:div
-    [:h2 "Welcome to clojurescript-react"]
+    [:h2 "Welcome to clojurescript-react: Chris"]
     [:div [:a {:href "/about"} "go to about page"]]
+    [:div [:a {:href "/todo"} "go to todo app"]]
     [:div [:a {:href "/todo"} "go to todo app"]]])
 
 
@@ -40,7 +41,7 @@
 ;; Initialize app
 
 (defn mount-root []
-  (reagent/render [current-page] (.getElementById js/document "app")))
+  (reagent/render [#'current-page] (.getElementById js/document "app")))
 
 (defn init! []
   (accountant/configure-navigation!

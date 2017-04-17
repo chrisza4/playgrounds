@@ -41,7 +41,7 @@
                                27 (stop)
                                nil)}])))
 
-(def todo-edit (witÏh-meta todo-input
+(def todo-edit (with-meta todo-input
                  {:component-did-mount #(.focus (r/dom-node %))}))
 
 (defn todo-stats [{:keys [filt active done]}]
