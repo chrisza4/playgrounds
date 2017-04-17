@@ -5,12 +5,13 @@
   [:footer {:class "footer"}
    [:span {:class "todo-count"}
     [:strong (str (:count props) " item(s) left")]]
-   (let [class-name-for #(if (= (:filter props) %) "selected" "")]
+   (let [class-name-for #(if (= (:filter props) %) "selected" "")
+         create-li
+          (fn [filter-type title]
+           [:li [:span {:class (class-name-for filter-type)
+                        :on-click #((:on-filter props) filter-type)} title]])]
     [:ul {:class "filters"}
-     [:li [:span {:class (class-name-for "all")
-                  :on-click #((:on-filter props) "all")} "All"]]
-     [:li [:span {:class (class-name-for "active")
-                  :on-click #((:on-filter props) "active")} "Active"]]
-     [:li [:span {:class (class-name-for "completed")
-                  :on-click #((:on-filter props) "completed")} "Completed"]]])
+     (create-li "all" "All")
+     (create-li "active" "Active")
+     (create-li "completed" "Completed")])
    [:button {:class "clear-completed"} "Clear completed"]])
