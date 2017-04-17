@@ -16,10 +16,8 @@
     "active" (filter #(not (:completed %)) todos)
     "completed" (filter #(:completed %) todos)))
 
-; (def todo-filter (r/atom "all"))
-
 (defn todo-board []
- (let [todo-filter (r/atom "all")] ; Why this won't work
+ (let [todo-filter (r/atom "all")]
   (fn [{:keys [items]}]
     (let [filtered-todos (filter-todo (vals items) @todo-filter)]
      [:div
