@@ -2,22 +2,26 @@
   (:require [reagent.core :as r]
             [cljs-uuid-utils.core :as uuid]))
 
-(defonce todo-data (r/atom (array-map)))
+(defonce app-state (r/atom {:todo-data (array-map)
+                            :todo-filter "all"}))
 
-(defn add [title]
+(defn add-todo [title]
   (let [new-uuid (uuid/uuid-string (uuid/make-random-uuid))]
-       (swap! todo-data assoc new-uuid {:id new-uuid
-                                        :title title
-                                        :completed false
-                                        :editing false})))
-(defn toggle [id]
- (swap! todo-data update-in [id :completed] not))
+       (swap! app-state assoc-in [:todo-data new-uuid] {:id new-uuid
+                                                        :title title
+                                                        :completed false
+                                                        :editing false})))
+(defn toggle-todo [id]
+ (swap! app-state update-in [:todo-data id :completed] not))
 
-(defn delete [id]
-  (swap! todo-data dissoc id))
+(defn delete-todo [id]
+  (swap! app-state update :todo-data dissoc id))
 
-(defn toggle-edit [id]
-  (swap! todo-data update-in [id :editing] not))
+(defn toggle-edit-todo [id]
+  (swap! app-state update-in [:todo-data id :editing] not))
 
-(defn edit [id title]
-  (swap! todo-data assoc-in [id :title] title))
+(defn edit-todo [id title]
+  (swap! app-state assoc-in [:todo-data id :title] title))
+
+(defn change-filter [x]
+  (swap! app-state assoc :todo-filter x))
