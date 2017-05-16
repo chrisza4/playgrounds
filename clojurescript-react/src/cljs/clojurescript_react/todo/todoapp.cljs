@@ -16,10 +16,16 @@
     "active" (filter #(not (:completed %)) todos)
     "completed" (filter #(:completed %) todos)))
 
+(defn myfunc [a b c]
+  (* c
+   (let [b-plus-1 (+ 1 b)]
+    (+ a b-plus-1))))
+
 (defn todo-board []
- (let [todo-filter (r/atom "all")]
+ ; (let [todo-filter (r/atom "all")]
   (fn [{:keys [items]}]
-    (let [filtered-todos (filter-todo (vals items) @todo-filter)]
+    (let [filtered-todos (filter-todo (vals items) @todo-filter)
+          todo-filter (r/atom "all")]
      [:div
       [:div{:class "todoapp"}
        [todo-header/todo-header {:on-save todo-state/add}]
@@ -40,7 +46,7 @@
                                  :filter @todo-filter
                                  :on-filter #(do
                                                (js/console.log "change to:" %)
-                                               (reset! todo-filter %))}]]]))))
+                                               (reset! todo-filter %))}]]])))
 
 (defn todo-app []
   [todo-board {:items @todo-state/todo-data}])
