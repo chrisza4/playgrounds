@@ -4,21 +4,13 @@ import $ from 'jquery'
 import { AppContainer } from 'react-hot-loader'
 import React from 'react'
 import ReactComponent from './reactModule'
-import ReactDOM from 'react-dom'
 import { executeWhenReady } from './jqueryModule1'
+import { render } from './middleBeforeReact'
 
 $(document).ready(() => {
   executeWhenReady()
 })
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
-    document.getElementById('reactroot')
-  )
-}
 
 render(ReactComponent)
 
@@ -27,7 +19,7 @@ if (module.hot) {
     executeWhenReady()
   })
 
-  module.hot.accept('./reactModule', () => {
+  module.hot.accept('./middleBeforeReact', () => {
     render(ReactComponent)
   })
 }
