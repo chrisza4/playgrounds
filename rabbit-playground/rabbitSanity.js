@@ -13,7 +13,7 @@ pub.connect('alerts', () => {
         console.log('SUB1 CONNECT')
         sub1.setEncoding('utf8');
         sub1.on('data', function(note) {
-          console.log("Alarum1! %s", note);
+          console.log('Alarum1! %s', note);
         })
         resolve()
       })
@@ -23,14 +23,13 @@ pub.connect('alerts', () => {
         console.log('SUB2 CONNECT')
         sub2.setEncoding('utf8');
         sub2.on('data', function(note) {
-          console.log("Alarum2! %s", note);
+          console.log('Alarum2! %s', note);
         })
         resolve()
       })
     }),
   ]).then(() => {
     console.log('EVERYTHING CONNECTED')
-
   })
 })
 
